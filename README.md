@@ -1,5 +1,7 @@
 # Getting Started
 
+<video src="https://github.com/user-attachments/assets/552c6f39-f3ed-4fc7-9fae-6440c16b81a4"></video>
+
 Update the environment varialbes in `.env`
 
 ```
