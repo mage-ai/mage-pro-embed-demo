@@ -1,5 +1,7 @@
 # Getting Started
 
+<video src="https://github.com/mage-ai/assets/raw/refs/heads/main/pro/features/mage-app-embeded.mp4"></video>
+
 Update the environment varialbes in `.env`
 
 ```
