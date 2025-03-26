@@ -1,0 +1,6 @@
+version: "2"
+tunnels:
+  cloud-frontend:
+    proto: http
+    hostname: "mage.ngrok.dev"
+    addr: localhost:3001
