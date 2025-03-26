@@ -115,10 +115,6 @@ pages:
 components:
   header:
     hidden: true
-  navigation_left:
-    hidden: true
-  navigation_right:
-    hidden: true
 ```
 
 You can change the order of what appears first as well as which buttons are visible by default
