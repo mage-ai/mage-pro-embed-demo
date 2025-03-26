@@ -1,6 +1,6 @@
 # Getting Started
 
-<video src="https://framerusercontent.com/assets/p6SVxvqXdIF56lcIdbxKxMgPAc.mp4"></video>
+<video src="https://github.com/user-attachments/assets/a88e851d-78a3-4904-9841-9643903e1167"></video>
 
 Update the environment varialbes in `.env`
 
