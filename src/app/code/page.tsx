@@ -2,6 +2,7 @@ import Embed from '@components/components/code/Embed';
 import { Headline, Grid } from '@components/components/shared';
 
 export default function Code() {
+  const headerHeight = 56;
   return (
     <div style={{
       height: '100vh',
@@ -11,13 +12,19 @@ export default function Code() {
         style={{
           borderBottom: '1px solid rgba(0, 0, 0, 0.5)',
           height: 56,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          backgroundColor: '#FFFFFF',
+          zIndex: 100,
+          width: '100%',
           overflow: 'hidden',
         }}
       >
         <Grid
           style={{
             padding: 12,
-            height: 56,
+            height: headerHeight,
             alignItems: 'center',
             gridColumnGap: 8,
             justifyContent: 'start',
@@ -35,7 +42,7 @@ export default function Code() {
         </Grid>
       </div>
 
-      <Embed />
+      <Embed headerHeight={headerHeight} />
     </div>
   );
 }

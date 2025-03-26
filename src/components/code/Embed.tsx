@@ -5,7 +5,7 @@ import ls from 'local-storage';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const EMBEDDED_ORIGIN = process.env.NEXT_PUBLIC_EMBEDDED_ORIGIN
-const EMBEDDED_BASE_PATH = process.env.NEXT_PUBLIC_EMBEDDED_BASE_PATH
+const EMBEDDED_PATH = process.env.NEXT_PUBLIC_EMBEDDED_PATH
 const MAGE_API_ENDPOINT = process.env.NEXT_PUBLIC_MAGE_API_ENDPOINT
 
 function queryFromUrl(url: string = null): any {
@@ -37,11 +37,11 @@ function queryFromUrl(url: string = null): any {
   return query;
 }
 
-export default function Embed() {
+export default function Embed({ headerHeight }) {
   const iframeRef = useRef(null);
 
   const [authCookies, setAuthCookies] = useState({});
-  const [iframeSrc, setIframeSrc] = useState(`${EMBEDDED_BASE_PATH}/embeds`);
+  const [iframeSrc, setIframeSrc] = useState(`${EMBEDDED_ORIGIN}/${EMBEDDED_PATH}/embeds`);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Function to send data to the iframe
@@ -60,7 +60,7 @@ export default function Embed() {
   const handleMessage = useCallback((event) => {
     // Verify the origin of the message for security
     if (event.origin === EMBEDDED_ORIGIN) {
-      console.log('Received message from iframe:', event.data?.type);
+      console.log('Received message from iframe:', event.data?.type, event.data);
 
       if (event.data && event.data.type === 'setCookie') {
         // Store cookies in state
@@ -108,9 +108,12 @@ export default function Embed() {
           axios.request({
             data: {
               api_key: 'zkWlN0PkIKSN0C11CfUHUj84OT5XOJ6tDZ6bDRO2',
+              // This is how you authenticate with the current user with the Mage Pro API
               session: {
-                email: 'Editor_0@mage.ai',
-                password: 'Editor_0@mage.ai',
+                // email: 'admin@admin.com',
+                // OR
+                username: 'admin',
+                password: 'admin',
               },
             },
             method: 'POST',
@@ -139,8 +142,8 @@ export default function Embed() {
       // You can either reload the iframe or just send a message to it
 
       const query = queryFromUrl();
-      const pipelineUUID = decodeURIComponent(query.pipeline_uuid ?? '');
-      const src = `${EMBEDDED_BASE_PATH}/pipelines/${pipelineUUID}/edit?hide=[]=header`;
+      const magePath = decodeURIComponent(query.mage_path ?? 'pipelines/example_pipeline/edit?hide[]=header');
+      const src = `${EMBEDDED_ORIGIN}/${EMBEDDED_PATH}/${magePath}`;
 
       if (iframe.src !== src) {
         console.log('RELOADING', src);
@@ -170,9 +173,13 @@ export default function Embed() {
       key={iframeSrc}
       style={{
         border: 'none',
-        height: 'calc(100% - 56px)',
+        boxSizing: 'border-box',
+        height: '100vh',
+        margin: 0,
         overflow: 'hidden',
-        width: 'calc(100% - 0px)',
+        padding: `${headerHeight}px 0 0 0`,
+        position: 'absolute',
+        width: '100vw',
       }}
       title="Embedded Content"
     />
