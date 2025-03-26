@@ -12,7 +12,7 @@ Example:
 
 ```
 NEXT_PUBLIC_EMBEDDED_ORIGIN=https://app.mage.ai
-NEXT_PUBLIC_EMBEDDED_BASE_PATH=https://app.mage.ai/optional_namespace
+NEXT_PUBLIC_EMBEDDED_PATH=/optional_namespace
 NEXT_PUBLIC_MAGE_API_ENDPOINT=https://api.mage.ai
 ```
 
@@ -112,6 +112,13 @@ pages:
               - transformer
               - data_exporter
       version: "0"
+components:
+  header:
+    hidden: true
+  navigation_left:
+    hidden: true
+  navigation_right:
+    hidden: true
 ```
 
 You can change the order of what appears first as well as which buttons are visible by default
